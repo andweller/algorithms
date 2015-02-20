@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "..\Sorting\sort.h"
+#include "..\Sorting\sort.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -122,6 +123,17 @@ namespace SortingTests
             Assert::AreEqual<int>(7, a[7]);
             Assert::AreEqual<int>(9, a[8]);
             Assert::AreEqual<int>(10, a[9]);
+        }
+
+
+        TEST_METHOD(MergeInsertion_Long_Long)
+        {
+            int const length = 3;
+            long long a[length] = { 0x10A00D1026677F8, 0x411A00C120663FE2, 0x110A00C1026637F0 };
+            merge_sort_insertion_optimization(a, length);
+            Assert::IsTrue(0x10A00D1026677F8 == a[0]);
+            Assert::IsTrue(0x110A00C1026637F0 == a[1]);
+            Assert::IsTrue(0x411A00C120663FE2 == a[2]);
         }
 
     };

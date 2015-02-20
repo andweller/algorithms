@@ -27,35 +27,26 @@ THE SOFTWARE. */
 #include "sort.h"
 
 
-/* Swaps two elements x, y of array A */
-inline void swap(int *A, int x, int y) {
-    int temp = A[x];
-    A[x] = A[y];
-    A[y] = temp;
+template <typename T>
+/* Sorts an array of a given length using insertion sort */
+void insertion_sort(T *first, int length) {
+    for (int outerIndex = 1; outerIndex < length; outerIndex++) {
+        T element = first[outerIndex];
+        int innerIndex = outerIndex - 1;
+
+        while (innerIndex >= 0 && first[innerIndex] > element) {
+	        first[innerIndex + 1] = first[innerIndex];
+	        innerIndex--;
+        }
+        
+        first[innerIndex + 1] = element;
+    }
 }
 
 
-/* Sorts an integer array of a given length using insertion sort
- * The function is written in the style of ANSI C */
-void insertion_sort(int *first, int length) {
-	int outerIndex, innerIndex, element;
-
-	for (outerIndex = 1; outerIndex < length; outerIndex++) {
-		element = first[outerIndex];
-
-		innerIndex = outerIndex - 1;
-		while (innerIndex >= 0 && first[innerIndex] > element) {
-			first[innerIndex + 1] = first[innerIndex];
-			innerIndex--;
-		}
-
-		first[innerIndex + 1] = element;
-	}
-}
-
-
-/* Sorts an integer array of a given length using bubble sort */
-void bubble_sort(int *A, int length) {
+template <typename T>
+/* Sorts an array of a given length using bubble sort */
+void bubble_sort(T *A, int length) {
     for (int outerIndex = 0; outerIndex < length; outerIndex++) {
         for (int innerIndex = length - 1; innerIndex > outerIndex; innerIndex--) {
             if (A[innerIndex] < A[innerIndex - 1])
@@ -66,8 +57,9 @@ void bubble_sort(int *A, int length) {
 
 
 
-/* Sorts an integer array of a given length using merge sort */
-void merge_sort(int *A, int length) {
+template <typename T>
+/* Sorts an array of a given length using merge sort */
+void merge_sort(T *A, int length) {
     if (length > 1) {
         int midpoint = length / 2;
         merge_sort(A, midpoint);
@@ -77,11 +69,12 @@ void merge_sort(int *A, int length) {
 }
 
 
-/*  Sorts an integer array of a given length using merge sort 
+template <typename T>
+/*  Sorts an array of a given length using merge sort 
     and insertion sort with small subsets (i.e. k=7) of the array
     which decreases the average running time and saves expensive
     allocation/deallocation calls for dynamic memory. */
-void merge_sort_insertion_optimization(int *A, int length) {
+void merge_sort_insertion_optimization(T *A, int length) {
     // Length at which to switch search algorithm
     int const k = 7;
 
@@ -101,10 +94,11 @@ void merge_sort_insertion_optimization(int *A, int length) {
 }
 
 
+template <typename T>
 /* Merge two sorted subarrays together into a sorted array 
  * Allocates dynamic memory in the order of the length */
-void __merge(int *A, int midpoint, int length) {
-    int *temp = new int[length];
+void __merge(T *A, int midpoint, int length) {
+    T *temp = new T[length];
     int firstIndex = 0;
     int secondIndex = midpoint;
 
@@ -122,6 +116,6 @@ void __merge(int *A, int midpoint, int length) {
             temp[i] = A[secondIndex++];
     }
 
-    memcpy(A, temp, sizeof(int)*length);
+    memcpy(A, temp, sizeof(T)*length);
     delete[] temp;
 }
