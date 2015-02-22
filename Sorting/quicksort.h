@@ -1,6 +1,10 @@
-/*	sort.h
- *	A collection of sorting algorithms
- */
+/*	
+
+File: quicksort.h
+
+Quick Sort Implementation
+
+*/
 
 /* The MIT License(MIT)
 
@@ -25,60 +29,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE. */
 
 
-#ifndef SORT_H_AW
-#define SORT_H_AW
+#ifndef QSORT_H_AW
+#define QSORT_H_AW
 
-#include <cstring>
 #include "swap.h"
 
-using std::memcpy;
 
-
-
-template <typename T>
-/* Sorts an array using insertion sort
-Running Time: O(n^2)
-  
-first - Pointer to the first element of the array to sort
-length - The length of the array */
-void insertion_sort(T *first, int length);
-
+enum QS_Pivot_Selection { Random, First, Last };
 
 
 template <typename T>
-/* Sorts an array using bubble sort
-   Running Time: O(n^2)
-  
-   A - Pointer to the first element of the array to sort
-   length - The length of the array
- */
-void bubble_sort(T *A, int length);
+/*
+Performs quicksort on the given array.
+Running Time: O(n lg n)
 
-
-
-template <typename T>
-/* Sorts an array using merge sort
-   Running Time: O(n lg n)
-  
-   A - Pointer to the first element of the array to sort
-   length - The length of the array
- */
-void merge_sort(T *A, int length);
-
-
-template <typename T>
-/*  Sorts an integer array using merge sort and insertion sort
-    for optimization with small subsets of the array
-    Running Time: O(n lg n)
-
-    A - Pointer to the first element of the integer array to sort
-    length - The length of the integer array
+A - The array to be sorted
+length - The length of the array to be sorted
+pivot_method - Method to use to sort the array, default is random
 */
-void merge_sort_insertion_optimization(T *A, int length);
+void quick_sort(T *A, int length, QS_Pivot_Selection pivot_method = Random);
+
 
 
 template <typename T>
-void __merge(T *A, int midpoint, int length);
+void __qs_sort(T *A, int length, QS_Pivot_Selection pivot_method);
+
+int __qs_get_pivot(int length, QS_Pivot_Selection pivot_method);
+
+template <typename T>
+int __qs_partition(T *A, int length);
 
 
 #endif
