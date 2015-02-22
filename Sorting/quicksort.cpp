@@ -35,6 +35,10 @@ THE SOFTWARE. */
 
 
 template <typename T>
+/*
+Performs quicksort on the given array.
+Sets the random seed if the pivot is selected randomly.
+*/
 void quick_sort(T *A, int length, QS_Pivot_Selection pivot_method) {
     if (pivot_method == Random)
         std::srand((unsigned int)time(NULL));
@@ -60,6 +64,11 @@ void __qs_sort(T *A, int length, QS_Pivot_Selection pivot_method) {
 
 
 template <typename T>
+/* 
+Partitions the data array using the last index as the pivot.
+Important:  The last element of the array must be set in place 
+            as the pivot element before this function is called!
+*/
 int __qs_partition(T *A, int length) {
     T pivot = A[length - 1];
 
@@ -77,6 +86,9 @@ int __qs_partition(T *A, int length) {
 }
 
 
+/*
+Returns the pivot according to the given pivot selection method.
+*/
 int __qs_get_pivot(int length, QS_Pivot_Selection pivot_method) {
     int pivot;
 

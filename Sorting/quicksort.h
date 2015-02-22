@@ -4,6 +4,14 @@ File: quicksort.h
 
 Quick Sort Implementation
 
+Example:
+
+    const int length = 5;
+    int data[length] = { 3, 9, 7, 2, 1 }
+    quick_sort(data, length);
+
+    Result: data is now equal to { 1, 2, 3, 7, 9 }
+
 */
 
 /* The MIT License(MIT)
@@ -41,6 +49,7 @@ enum QS_Pivot_Selection { Random, First, Last };
 template <typename T>
 /*
 Performs quicksort on the given array.
+The sorting is performed in place.
 Running Time: O(n lg n)
 
 A - The array to be sorted
@@ -52,11 +61,14 @@ void quick_sort(T *A, int length, QS_Pivot_Selection pivot_method = Random);
 
 
 template <typename T>
+/* Perform quicksort */
 void __qs_sort(T *A, int length, QS_Pivot_Selection pivot_method);
 
+/* Returns a pivot for use in quick sort partitioning. */
 int __qs_get_pivot(int length, QS_Pivot_Selection pivot_method);
 
 template <typename T>
+/* Parition the data array. The last index is used as the pivot. */
 int __qs_partition(T *A, int length);
 
 
