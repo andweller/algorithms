@@ -133,5 +133,25 @@ namespace SortingTests
             Assert::AreEqual<int>(10, b[9]);
         }
 
+
+        TEST_METHOD(CountingSort_Max_Six)
+        {
+            int const length = 11;
+            int a[length] = { 6, 0, 2, 0, 1, 3, 4, 6, 1, 3, 2 };
+            int b[length];
+            counting_sort(a, b, length, 6);
+            Assert::AreEqual<int>(0, b[0]);
+            Assert::AreEqual<int>(0, b[1]);
+            Assert::AreEqual<int>(1, b[2]);
+            Assert::AreEqual<int>(1, b[3]);
+            Assert::AreEqual<int>(2, b[4]);
+            Assert::AreEqual<int>(2, b[5]);
+            Assert::AreEqual<int>(3, b[6]);
+            Assert::AreEqual<int>(3, b[7]);
+            Assert::AreEqual<int>(4, b[8]);
+            Assert::AreEqual<int>(6, b[9]);
+            Assert::AreEqual<int>(6, b[10]);
+        }
+
     };
 }
