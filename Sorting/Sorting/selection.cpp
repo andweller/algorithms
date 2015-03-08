@@ -29,7 +29,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE. */
 
 
+#include <cstdlib>
+#include <ctime>
 #include "selection.h"
+#include "swap.h"
 
 
 
@@ -61,4 +64,58 @@ int maximum(int *input, int length) {
             max = input[index];
     }
     return max;
+}
+
+
+
+int quick_select(int *input, int length, int order) {
+    std::srand((unsigned int)time(NULL));
+    return __q_select(input, length, order);
+}
+
+
+
+
+/*
+Selects the element with statistical ordering of i in the given array.
+The function is recursive.
+*/
+int __q_select(int *input, int length, int order) {
+    if (length == 1)
+        return input[0];
+
+    int pivot_index = std::rand() % length;
+    swap(input, length - 1, pivot_index);
+    pivot_index = __q_select_partition(input, length);
+
+    if (order == pivot_index + 1)
+        return input[pivot_index];
+    else if (order < pivot_index + 1)
+        return __q_select(input, pivot_index, order);
+    else
+        return __q_select(input + pivot_index + 1, 
+                            length - pivot_index - 1, order - pivot_index - 1);
+}
+
+
+
+/*
+Partitions the data array using the last index as the pivot.
+Important:  The last element of the array must be set in place
+as the pivot element before this function is called!
+*/
+int __q_select_partition(int *input, int length) {
+    int pivot = input[length - 1];
+
+    int traverse = 0;
+    int next_swap = 0;
+
+    while (traverse < (length - 1)) {
+        if (input[traverse] < pivot)
+            swap(input, traverse, next_swap++);
+        traverse++;
+    }
+
+    swap(input, length - 1, next_swap);
+    return next_swap;
 }

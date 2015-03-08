@@ -64,4 +64,32 @@ Returns the maximum element.
 int maximum(int *input, int length);
 
 
+
+
+/*
+Selects the element that has statistical ordering of i in the given array.
+Selection is performed using the randomized Quick-select algorithm.
+Running Time: Expected Linear Time
+
+input:  Pointer to the first element of the data array.
+        The array is not modified.
+length: Length of the data array.
+order:  The i'th statistical order to find.
+
+Returns the element with statistical order i in the array.
+
+Example:
+    const int length = 5;
+    int data[length] = { 3, 9, 7, 2, 1 }
+    std::cout << quick_select(data, length, 1);     // 1
+    std::cout << quick_select(data, length, 4);     // 7
+*/
+int quick_select(int *input, int length, int order);
+
+
+int __q_select(int *input, int length, int order);
+
+int __q_select_partition(int *input, int length);
+
+
 #endif
