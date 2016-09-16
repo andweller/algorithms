@@ -1,8 +1,10 @@
-A collection of algorithms and data structures.
+# Algorithms
+
+A small collection of algorithms and data structures for sorting.
 
 
 
-The MIT License(MIT)
+**The MIT License(MIT)**
 
 Copyright(c) 2015 andweller
 
